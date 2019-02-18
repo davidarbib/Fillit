@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
-/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
+/*   Created: 2019/02/05 10:57:39 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/15 13:27:22 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef FILLIT_H
+# define FILLIT_H
 
-int		ft_toupper(int arg)
+typedef struct		s_fillit
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
-}
+	char	**tets;
+	char	*square;
+	int		size;
+	int		nb_tets;
+	int		drift;
+}					t_fillit;
+
+void				display(char *str);
+char				**parse_tets(char *file);
+char				*fillit(char **tets);
+int					slow_sqrt(int nb);
+char				*increase(char *square, int size);
+void				remove_tet(char *square, int i);
+
+#endif

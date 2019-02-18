@@ -6,31 +6,35 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 21:25:30 by darbib            #+#    #+#              #
-#    Updated: 2019/02/01 20:43:57 by darbib           ###   ########.fr        #
+#    Updated: 2019/02/14 17:59:24 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-EXE = fillit
-LIBS = libft/libft.a
 CFLAGS = -c -Wall -Werror -Wextra
 LFLAGS = -o $(EXE) -Wall -Werror -Wextra
-ALL_C = main.c
-ALL_O = main.o
+
+EXE = fillit
+LIBS = libft/libft.a
+
+SRC = main.c parsing.c placing.c utils.c
+OBJ = $(SRC:.c=.o)
+
+# **************************************************************************** #
 
 all : $(EXE)
 
-$(EXE): $(ALL_O) $(LIBS)
-	$(CC) $(LFLAGS) $(ALL_O) $(LIBS)
+$(EXE): $(OBJ) $(LIBS)
+	$(CC) $(LFLAGS) $(OBJ) $(LIBS)
 
-$(ALL_O): $(ALL_C)
-	$(CC) $(CFLAGS) $(ALL_C)
+$(OBJ): $(SRC)
+	$(CC) $(CFLAGS) $(SRC)
 
 $(LIBS) :
 	make -C libft
 
 clean:
-	rm -f $(ALL_O)
+	rm -f $(OBJ)
 
 fclean : clean
 	rm -f $(EXE)

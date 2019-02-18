@@ -3,83 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/03 15:48:56 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/03 17:52:01 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
-static char	*makezero(void)
+static int	len(int n)
 {
-	char *n_str;
+	int l;
 
-	if (!(n_str = (char *)malloc(sizeof(char) * 2)))
-		return (NULL);
-	n_str[0] = '0';
-	n_str[1] = '\0';
-	return (n_str);
+	l = (n >= 0 ? 1 : 2);
+	while (n > 9 || n < -9)
+	{
+		n /= 10;
+		l++;
+	}
+	return (l);
 }
 
-static char	*makestr(int d_nb, int sign, int *tab)
+static int	power(int size)
 {
-	char	*n_str;
-	size_t	j;
+	int i;
 
-	if (!(n_str = (char *)malloc(sizeof(char) * (d_nb + 1 +
-						((sign - 1) * (sign - 1) / 4)))))
-		return (NULL);
-	d_nb--;
-	j = 0;
-	if (sign == -1)
-	{
-		n_str[0] = '-';
-		j = 1;
-	}
-	while (d_nb > -1)
-	{
-		n_str[j] = (char)(tab[d_nb] + '0');
-		d_nb--;
-		j++;
-	}
-	n_str[j] = '\0';
-	return (n_str);
+	i = 1;
+	while (size-- > 0)
+		i *= 10;
+	return (i);
 }
 
-static int	sign_of(int n)
+static void	dew_it(char *str, int size, long n)
 {
-	int		sign;
-
-	sign = 1;
-	if (n < 0)
-		sign = -1;
-	return (sign);
+	n = n > 0 ? n : -n;
+	while (size)
+		*(str++) = n / power(--size) % 10 + '0';
+	*str = 0;
 }
 
 char		*ft_itoa(int n)
 {
-	int		tab[11];
-	int		i;
-	int		sign;
+	char *str;
 
-	if (!n)
-		return (makezero());
-	i = 0;
-	if (n == -2147483648)
-	{
-		tab[0] = 8;
-		i = 1;
-		n = -214748364;
-	}
-	sign = sign_of(n);
-	n *= sign;
-	while (n > 0)
-	{
-		tab[i] = n % 10;
-		n /= 10;
-		i++;
-	}
-	return (makestr(i, sign, tab));
+	if (!(str = (char *)malloc(len(n) + 1)))
+		return (0);
+	if (n < 0)
+		*str = '-';
+	dew_it(str + (n < 0 ? 1 : 0), len(n) - (n < 0 ? 1 : 0), (long)n);
+	return (str);
 }

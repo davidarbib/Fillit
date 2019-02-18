@@ -1,31 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/02 17:19:02 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/02 19:41:54 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
-	size_t	i;
+	unsigned int	i;
+	unsigned char	*t1;
+	unsigned char	*t2;
 
+	t1 = (unsigned char*)dst;
+	t2 = (unsigned char*)src;
 	i = 0;
-	while (i < n && ((const unsigned char *)src)[i] != (unsigned char)c)
+	while (i < n)
 	{
-		((unsigned char *)dst)[i] = ((const unsigned char *)src)[i];
+		t1[i] = t2[i];
+		if (t1[i] == (unsigned char)c)
+			return (t1 + i + 1);
 		i++;
 	}
-	if (i < n)
-	{
-		((unsigned char *)dst)[i] = ((const unsigned char *)src)[i];
-		return (dst + i + 1);
-	}
-	return (NULL);
+	return (0);
 }

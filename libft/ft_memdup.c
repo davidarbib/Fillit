@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_memdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,8 +11,18 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int		ft_toupper(int arg)
+void	*ft_memdup(void **dest, const void *src, size_t n)
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
+	int i;
+
+	i = 0;
+	*dest = malloc(n);
+	while (n--)
+	{
+		*(*((unsigned char **)dest) + i) = *((unsigned char *)src + i);
+		i++;
+	}
+	return (*dest);
 }

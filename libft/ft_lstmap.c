@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/12 19:31:46 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/13 17:46:30 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,11 @@
 
 t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	t_list *lst_cpy;
-	t_list *head_cpy;
-	t_list *trans_node;
+	t_list *new;
 
 	if (!lst)
-		return (NULL);
-	trans_node = (*f)(lst);
-	lst = lst->next;
-	lst_cpy = ft_lstnew((void const *)trans_node->content,
-			trans_node->content_size);
-	head_cpy = lst_cpy;
-	while (lst)
-	{
-		trans_node = (*f)(lst);
-		lst_cpy->next = ft_lstnew((void const *)trans_node->content,
-				trans_node->content_size);
-		lst_cpy = lst_cpy->next;
-		lst = lst->next;
-	}
-	return (head_cpy);
+		return (0);
+	new = f(lst);
+	new->next = ft_lstmap(lst->next, f);
+	return (new);
 }

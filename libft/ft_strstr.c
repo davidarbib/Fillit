@@ -3,31 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/23 17:44:41 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/03 18:02:48 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strstr(const char *haystack, const char *needle)
+char	*ft_strstr(const char *str, const char *to_find)
 {
-	int		i;
-	char	*ptr;
+	int i;
 
-	if (!ft_strlen(needle))
-		return ((char *)haystack);
-	ptr = (char *)haystack;
-	while (*ptr)
+	i = 0;
+	while (str[i])
 	{
-		i = 0;
-		while (ptr[i] == needle[i] && needle[i])
-			i++;
-		if (!needle[i])
-			return (ptr);
-		ptr++;
+		if (!ft_strncmp((char *)str + i, (char *)to_find,
+						ft_strlen(to_find)))
+			return ((char *)str + i);
+		i++;
 	}
-	return (NULL);
+	if (!str[0] && !to_find[0])
+		return ((char *)str);
+	return (0);
 }
