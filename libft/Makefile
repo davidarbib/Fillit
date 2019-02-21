@@ -6,7 +6,7 @@
 #    By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/09 09:47:08 by pitriche          #+#    #+#              #
-#    Updated: 2019/02/05 11:30:12 by pitriche         ###   ########.fr        #
+#    Updated: 2019/02/21 17:45:05 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ $(NAME): $(OBJ)
 	ar rc $@ $^
 	ranlib $@
 
-$(OBJ) : $(SRC)
+%.o: %.c
 	$(CC) $(FLAGS) -c $^
  
 clean:
