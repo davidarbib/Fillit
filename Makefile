@@ -6,7 +6,7 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 21:25:30 by darbib            #+#    #+#              #
-#    Updated: 2019/02/21 17:42:22 by darbib           ###   ########.fr        #
+#    Updated: 2019/02/21 18:10:12 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,26 +22,30 @@ OBJ = $(SRC:.c=.o)
 
 # **************************************************************************** #
 
-.PHONY: all
+.PHONY: all clean fclean re
 
 all : $(EXE)
+	@echo 'Linking successful, ready to run'
 
 $(EXE): $(OBJ) $(LIBS)
-	$(CC) $(LFLAGS) $(OBJ) $(LIBS)
+	@echo 'Compiling successful'
+	@$(CC) $(LFLAGS) $(OBJ) $(LIBS)
 
 %.o: %.c
-	@ $(CC) $(CFLAGS) $^
-	@ echo -n '.'
+	@$(CC) $(CFLAGS) $^
+	@echo -n '.'
 
 $(LIBS) :
-	make -C libft
+	@make -C libft
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo "Fillit objects deleted"
 
 fclean : clean
-	rm -f $(EXE)
-	make -C libft fclean 
+	@rm -f $(EXE)
+	@make -C libft fclean 
+	@echo 'Fillit deleted'
 
 re : fclean all
 

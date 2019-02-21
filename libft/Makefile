@@ -6,7 +6,7 @@
 #    By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/09 09:47:08 by pitriche          #+#    #+#              #
-#    Updated: 2019/02/21 17:45:05 by darbib           ###   ########.fr        #
+#    Updated: 2019/02/21 18:09:24 by darbib           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,19 +31,24 @@ ft_lstnew_empty.c get_next_line.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+	@echo 'Libft linking successful'
 
 $(NAME): $(OBJ)
-	ar rc $@ $^
-	ranlib $@
+	@echo 'Libft compiling successful'
+	@ar rc $@ $^
+	@ranlib $@
 
 %.o: %.c
-	$(CC) $(FLAGS) -c $^
+	@$(CC) $(FLAGS) -c $^
+	@echo -n '.'
  
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
+	@echo 'Libft objects deleted'
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@echo 'libft.a deleted'
 
 re: fclean all
 
