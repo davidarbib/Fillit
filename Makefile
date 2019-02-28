@@ -6,34 +6,47 @@
 #    By: darbib <darbib@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/16 21:25:30 by darbib            #+#    #+#              #
-#    Updated: 2019/02/01 20:43:57 by darbib           ###   ########.fr        #
+#    Updated: 2019/02/22 14:35:08 by pitriche         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = gcc
-EXE = fillit
-LIBS = libft/libft.a
 CFLAGS = -c -Wall -Werror -Wextra
 LFLAGS = -o $(EXE) -Wall -Werror -Wextra
-ALL_C = main.c
-ALL_O = main.o
+
+EXE = fillit
+LIBS = libft/libft.a
+
+SRC = main.c parsing.c placing.c utils.c
+OBJ = $(SRC:.c=.o)
+
+# **************************************************************************** #
+
+.PHONY: all clean fclean re
 
 all : $(EXE)
+	@echo 'Linking successful, ready to run'
 
-$(EXE): $(ALL_O) $(LIBS)
-	$(CC) $(LFLAGS) $(ALL_O) $(LIBS)
+$(EXE): $(LIBS) $(OBJ)
+	@echo '✔'
+	@echo 'Compiling successful'
+	@$(CC) $(LFLAGS) $(OBJ) $(LIBS)
 
-$(ALL_O): $(ALL_C)
-	$(CC) $(CFLAGS) $(ALL_C)
+%.o: %.c
+	@$(CC) $(CFLAGS) $^
+	@echo -n '.'
 
 $(LIBS) :
-	make -C libft
+	@make -C libft
 
 clean:
-	rm -f $(ALL_O)
+	@rm -f $(OBJ)
+	@echo "Fillit objects deleted"
 
 fclean : clean
-	rm -f $(EXE)
-	make -C libft fclean 
+	@rm -f $(EXE)
+	@make -C libft fclean 
+	@echo 'Fillit deleted'
 
 re : fclean all
+

@@ -3,49 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/29 19:24:22 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/03 18:04:30 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	cpt(char const *s)
+static int	ft_strtrimlen(char const *s)
 {
-	int	i;
+	int i;
+	int i2;
 
+	if (!s)
+		return (0);
 	i = 0;
-	while (s[i])
+	i2 = ft_strlen(s);
+	while (ft_isspace(s[i]))
 		i++;
-	i--;
-	while (s[i] == ' ' || s[i] == '\n' || s[i] == '\t')
-		i--;
-	if (i < -1)
-		i = -1;
-	return (i);
+	if (i == i2)
+		return (0);
+	while (ft_isspace(s[--i2]))
+		;
+	return (i2 - i + 1);
 }
 
 char		*ft_strtrim(char const *s)
 {
-	char	*trim;
-	size_t	left;
+	char	*str;
 	int		i;
+	int		i2;
 
+	i = 0;
 	if (!s)
-		return (NULL);
-	left = 0;
-	while (s[left] && (s[left] == ' ' || s[left] == '\n' || s[left] == '\t'))
-		left++;
-	i = cpt(s + left);
-	if (!(trim = (char *)malloc(sizeof(char) * (i + 2))))
-		return (NULL);
-	trim[i + 1] = '\0';
-	while (i > -1)
-	{
-		trim[i] = s[i + left];
-		i--;
-	}
-	return (trim);
+		return (0);
+	i2 = ft_strtrimlen(s);
+	if (!(str = ft_strnew(i2)))
+		return (0);
+	while (ft_isspace(s[i]))
+		i++;
+	ft_strncpy(str, s + i, i2);
+	return (str);
 }

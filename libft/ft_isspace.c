@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,8 @@
 
 #include "libft.h"
 
-int		ft_toupper(int arg)
+int		ft_isspace(int c)
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
+	return (c == ' ' || c == '\f' || c == '\t' || c == '\n' || c == '\r' || c ==
+	'\v');
 }

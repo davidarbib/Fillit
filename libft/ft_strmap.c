@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/25 22:42:04 by darbib            #+#    #+#             */
-/*   Updated: 2018/12/03 22:59:43 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 char	*ft_strmap(char const *s, char (*f)(char))
 {
-	size_t	i;
-	char	*s2;
+	char	*r;
+	int		i1;
+	int		i2;
 
+	i1 = 0;
+	i2 = 0;
 	if (!s)
-		return (NULL);
-	if (!(s2 = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1))))
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		s2[i] = (f)(s[i]);
-		i++;
-	}
-	s2[i] = '\0';
-	return (s2);
+		return (0);
+	if (!(r = ft_strnew(ft_strlen(s))))
+		return (0);
+	while (s[i2])
+		r[i1++] = f(s[i2++]);
+	return (r);
 }

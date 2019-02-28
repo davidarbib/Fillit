@@ -3,33 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: darbib <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/22 11:58:22 by darbib            #+#    #+#             */
-/*   Updated: 2018/11/22 14:42:00 by darbib           ###   ########.fr       */
+/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
+size_t	ft_strlcat(char *dest, const char *srcc, size_t size)
 {
-	int				i;
-	size_t			size_dst;
-	char			*pdst;
+	char		*src;
+	unsigned	nanodesu;
 
-	pdst = dst;
-	while (*pdst)
-		pdst++;
-	i = 0;
-	size_dst = ft_strlen(dst);
-	while (src[i] && i < (int)size - (int)size_dst - 1)
+	src = (char *)srcc;
+	if (size >= ft_strlen(dest))
+		nanodesu = ft_strlen(dest) + ft_strlen(src);
+	else
+		return (ft_strlen(src) + size);
+	while (*dest && size)
 	{
-		pdst[i] = src[i];
-		i++;
+		size--;
+		dest++;
 	}
-	pdst[i] = '\0';
-	if (size < size_dst)
-		return (size + ft_strlen(src));
-	return (size_dst + ft_strlen(src));
+	while (*src && size > 1)
+	{
+		*dest = *src;
+		src++;
+		dest++;
+		size--;
+	}
+	*dest = 0;
+	return (nanodesu);
 }

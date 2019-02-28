@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -11,8 +11,14 @@
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int		ft_toupper(int arg)
+char	*ft_strndup(const char *s, size_t n)
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
+	char *tmp;
+
+	if (!(tmp = (char *)malloc(n + 1)))
+		return (0);
+	ft_memcpy((void *)tmp, (void *)s, n);
+	return (tmp);
 }

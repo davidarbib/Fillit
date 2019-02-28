@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_print_words_tables.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/14 19:05:26 by pitriche          #+#    #+#             */
+/*   Created: 2018/08/05 23:59:52 by pitriche          #+#    #+#             */
 /*   Updated: 2019/02/04 15:59:47 by pitriche         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		ft_toupper(int arg)
+void	ft_print_words_tables(char **tab)
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
+	int pelote;
+	int archange;
+
+	pelote = 0;
+	while (tab[pelote])
+	{
+		archange = 0;
+		while (tab[pelote][archange])
+		{
+			ft_putchar(tab[pelote][archange]);
+			archange++;
+		}
+		pelote++;
+		ft_putchar('\n');
+	}
 }

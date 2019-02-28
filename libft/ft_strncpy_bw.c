@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_toupper.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy_bw.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pitriche <pitriche@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,19 @@
 
 #include "libft.h"
 
-int		ft_toupper(int arg)
+char	*ft_strncpy_bw(char *dest, const char *src, size_t n)
 {
-	return (arg >= 'a' && arg <= 'z' ? arg - 'a' + 'A' : arg);
+	int i1;
+	int i2;
+
+	i1 = n - 1;
+	i2 = n - 1;
+	if (!src)
+	{
+		ft_bzero(dest, n);
+		return (0);
+	}
+	while (n--)
+		dest[i1--] = src[i2--];
+	return (dest);
 }
