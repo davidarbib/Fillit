@@ -6,12 +6,13 @@
 /*   By: darbib <darbib@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/05 10:57:39 by pitriche          #+#    #+#             */
-/*   Updated: 2019/02/28 09:31:39 by darbib           ###   ########.fr       */
+/*   Updated: 2019/02/28 09:47:56 by darbib           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
 #include "libft/libft.h"
+#include <stdlib.h>
 
 #include <stdio.h>
 #define RED   "\x1B[31m"
